@@ -17,9 +17,10 @@ public class FolhaDePagamento {
             System.out.println("Opção 0 - Sair do programa");
             opcao = teclado.nextInt();
 
-            switch (opcao){
+            switch (opcao) {
                 case 1:
                     teclado.nextLine();
+
                     System.out.print("Nome do Colaborador: ");
                     String nomeFuncionario = teclado.nextLine();
 
@@ -44,8 +45,16 @@ public class FolhaDePagamento {
                     System.out.print("Número do Registro do Colaborador Comissionado: ");
                     int numeroRegistroFuncionarioComissionado = teclado.nextInt();
 
-                    System.out.print("Informe o valor vendido pelo comissionado: ");
-                    double vendas = teclado.nextDouble();
+                    double vendas;
+
+                    do {
+                        System.out.print("Informe o valor vendido pelo comissionado (Não pode ser um valor negativo): ");
+                        vendas = teclado.nextDouble();
+
+                        if (vendas < 0) {
+                            System.out.println("Erro! O valor das vendas não pode ser negativo!");
+                        }
+                    } while (vendas < 0);
 
                     System.out.print("Qual percentual (%) para comissão: ");
                     double percentual = teclado.nextDouble();
@@ -70,11 +79,26 @@ public class FolhaDePagamento {
                     System.out.print("Número do Registro do Colaborador por produção: ");
                     int numeroRegistroFuncionarioProducao = teclado.nextInt();
 
-                    System.out.print("Informe o valor por peça produzida(R$): ");
-                    double valorPeca = teclado.nextDouble();
+                    double valorPeca;
 
-                    System.out.print("Informe a quantidade de peças produzidas: ");
-                    int pecasProduzidas = teclado.nextInt();
+                    do {
+                        System.out.println("Informe o valor por peça produzida (Não pode ser um valor negativo): R$ ");
+                        valorPeca = teclado.nextDouble();
+                        if (valorPeca < 0) {
+                            System.out.print("Erro! O valor das peças não pode ser negativo!");
+                            valorPeca = teclado.nextDouble();
+                        }
+                    } while (valorPeca < 0);
+
+                    int pecasProduzidas;
+
+                    do {
+                        System.out.print("Informe a quantidade de peças produzidas (Não pode ser um valor negativo): ");
+                        pecasProduzidas = teclado.nextInt();
+                        if (pecasProduzidas < 0) {
+                            System.out.println("Erro! Quantidade de peças produzidas não pode ser um valor negativo!");
+                        }
+                    } while (pecasProduzidas < 0);
 
                     FuncionarioProducao novoFuncionarioProducao = new FuncionarioProducao();
                     novoFuncionarioProducao.nome = nomeFuncionarioProducao;
@@ -86,6 +110,15 @@ public class FolhaDePagamento {
 
                     System.out.println("Funcionário cadastrado com sucesso!");
                     break;
+
+                case 4:
+                    System.out.println("--- RELATÓRIO DE FOLHA DE PAGAMENTO ---");
+                    System.out.println("Total de colaboradores: " + lista.size());
+
+                    for (Colaborador c: lista){
+                        System.out.println("Nome do Colaborador: " + c.nome);
+                        System.out.println("Salário Final: R$ " + c.calcularSalarioFinal());
+                    }
             }
         } while (opcao != 0 );
     }
