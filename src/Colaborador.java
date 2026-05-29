@@ -11,11 +11,9 @@ public class Colaborador {
     final double SALARIO_BASE = 2000.00;
 
     /*
-    Método criado para cálculo do salário final
+    Metodo criado para cálculo do salário final
     Na classe base (padrão), retorna apenas o valor fixo,
     nas classes filhas será sobrescrito para incluir bônus ou produção.
      */
-    public double calcularSalarioFinal() {
-        return SALARIO_BASE;
-    }
+    public double calcularSalarioFinal() { return SALARIO_BASE; }
 }
