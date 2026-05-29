@@ -56,8 +56,16 @@ public class FolhaDePagamento {
                         }
                     } while (vendas < 0);
 
-                    System.out.print("Qual percentual (%) para comissão: ");
-                    double percentual = teclado.nextDouble();
+                    double percentual;
+
+                    do {
+                        System.out.print("Qual percentual (%) para comissão: ");
+                        percentual = teclado.nextDouble();
+
+                        if (percentual < 0){
+                            System.out.println("Erro! O valor pencentual não pode ser negativo!");
+                        }
+                    } while (percentual < 0);
 
                     FuncionarioComissionado novoComissionado = new FuncionarioComissionado();
                     novoComissionado.nome = nomeFuncionarioComissionado;
@@ -86,7 +94,6 @@ public class FolhaDePagamento {
                         valorPeca = teclado.nextDouble();
                         if (valorPeca < 0) {
                             System.out.print("Erro! O valor das peças não pode ser negativo!");
-                            valorPeca = teclado.nextDouble();
                         }
                     } while (valorPeca < 0);
 
@@ -117,8 +124,18 @@ public class FolhaDePagamento {
 
                     for (Colaborador c: lista){
                         System.out.println("Nome do Colaborador: " + c.nome);
+                        System.out.println("Registro: " + c.numeroRegistro);
                         System.out.println("Salário Final: R$ " + c.calcularSalarioFinal());
                     }
+                    break;
+
+                case 0:
+                    System.out.print("Encerrando o sistema, tenha um bom dia!");
+                    break;
+
+                default:
+                    System.out.println("Opção inválida! Tente novamente.");
+                    break;
             }
         } while (opcao != 0 );
     }
